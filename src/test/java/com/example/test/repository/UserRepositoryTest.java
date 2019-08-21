@@ -17,7 +17,7 @@ public class UserRepositoryTest extends TestApplicationTests {
     @Test
     public void create(){
         User user = new User();
-        user.setUserAccount("user4");
+        user.setUserAccount("user5");
         user.setEmail("user4@gmail.com");
         user.setPhoneNumber("010-1111-2222");
         user.setRegDt(LocalDateTime.now());
