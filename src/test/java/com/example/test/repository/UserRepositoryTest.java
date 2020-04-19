@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -17,8 +18,8 @@ public class UserRepositoryTest extends TestApplicationTests {
     @Test
     public void create(){
         User user = new User();
-        user.setUserAccount("user5");
-        user.setEmail("user4@gmail.com");
+        user.setAccount("user1");
+        user.setEmail("user1@gmail.com");
         user.setPhoneNumber("010-1111-2222");
         user.setRegDt(LocalDateTime.now());
         user.setRegUser("shlee0882");
@@ -37,11 +38,12 @@ public class UserRepositoryTest extends TestApplicationTests {
     }
 
     @Test
+    @Transactional
     public void update(){
         Optional<User> user = userRepository.findById(1L);
 
         user.ifPresent(selectUser ->{
-            selectUser.setUserAccount("modUser1");
+            selectUser.setAccount("modUser1");
             selectUser.setEmail("modUser1@gmail.com");
             selectUser.setModDt(LocalDateTime.now());
             selectUser.setModUser("shlee0882");
@@ -50,19 +52,20 @@ public class UserRepositoryTest extends TestApplicationTests {
         });
     }
 
-//    @Test
-//    public void delete(){
-//        Optional<User> user = userRepository.findById(1L);
-//
-//        Assert.assertTrue(user.isPresent());    // true
-//        user.ifPresent(selectUser ->{
-//            userRepository.delete(selectUser);
-//        });
-//
-//        Optional<User> deleteUser = userRepository.findById(1L);
-//
-//        Assert.assertFalse(deleteUser.isPresent());    // false
-//    }
+    @Test
+    @Transactional
+    public void delete(){
+        Optional<User> user = userRepository.findById(1L);
+
+        Assert.assertTrue(user.isPresent());    // true
+        user.ifPresent(selectUser ->{
+            userRepository.delete(selectUser);
+        });
+
+        Optional<User> deleteUser = userRepository.findById(1L);
+
+        Assert.assertFalse(deleteUser.isPresent());    // false
+    }
 
 
 }

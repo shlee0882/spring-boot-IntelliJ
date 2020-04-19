@@ -19,7 +19,8 @@ public class GetAPIController {
 
     @GetMapping("/getMultiParameters")
     public String getMultiParameters(SearchVO searchVo) {
-        return "VO사용 아이디는 "+searchVo.getId()+" 이메일은 "+searchVo.getEmail();
+        return "";
+        // return "VO사용 아이디는 "+searchVo.getId()+" 이메일은 "+searchVo.getEmail();
     }
 
     @GetMapping("/getMultiParametersRtnJson")
