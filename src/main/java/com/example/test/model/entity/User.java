@@ -22,4 +22,9 @@ public class User {
     private String regUser;
     private LocalDateTime modDt;
     private String modUser;
+
+    // 1 : N
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<OrderDetail> orderDetailList;
+
 }

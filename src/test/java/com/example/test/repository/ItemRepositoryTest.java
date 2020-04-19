@@ -25,14 +25,33 @@ public class ItemRepositoryTest extends TestApplicationTests {
     }
 
     @Test
+    public void create2(){
+        Item item = new Item();
+        item.setName("냉장고");
+        item.setPrice(700000);
+        item.setContent("LG 냉장고");
+
+        Item newItem = itemRepository.save(item);
+        Assert.assertNotNull(newItem);
+    }
+
+    @Test
+    public void create3(){
+        Item item = new Item();
+        item.setName("세탁기");
+        item.setPrice(500000);
+        item.setContent("트롬 세탁기");
+
+        Item newItem = itemRepository.save(item);
+        Assert.assertNotNull(newItem);
+    }
+
+    @Test
     public void read(){
         Long id = 1L;
 
         Optional<Item> item = itemRepository.findById(id);
 
         Assert.assertTrue(item.isPresent());
-        item.ifPresent( i -> {
-            System.out.println(i);
-        });
     }
 }

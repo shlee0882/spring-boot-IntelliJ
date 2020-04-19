@@ -1,6 +1,7 @@
 package com.example.test.repository;
 
 import com.example.test.TestApplicationTests;
+import com.example.test.model.entity.Item;
 import com.example.test.model.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,11 +30,18 @@ public class UserRepositoryTest extends TestApplicationTests {
     }
 
     @Test
+    @Transactional
     public void read(){
-        Optional<User> user = userRepository.findById(2L);
+        // select * from user where id = ?
+        // Optional<User> user = userRepository.findById(2L);
+        Optional<User> user = userRepository.findByAccount("user2");
 
         user.ifPresent(selectUser ->{
             System.out.println("user: "+selectUser);
+            selectUser.getOrderDetailList().stream().forEach(detail->{
+                Item item= detail.getItem();
+                System.out.println(item);
+            });
         });
     }
 
